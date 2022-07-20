@@ -17,13 +17,8 @@ services:
     environment:
       TZ: '{{ pihole_timezone }}'
       WEBPASSWORD: '{{ pihole_password }}'
-      ServerIP: '{{ ansible_facts['default_ipv4']['address'] }}'
-    dns:
-      - 127.0.0.1
-      - 8.8.8.8
+      FTLCONF_REPLY_ADDR4: '{{ ansible_facts['default_ipv4']['address'] }}'
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    cap_add:
-      - NET_ADMIN
     restart: unless-stopped
